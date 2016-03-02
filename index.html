@@ -2,12 +2,14 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Hello World!</title>
-  </head>
-  <body>
-    <h1>Hello World!</h1>
-    We are using node <script>document.write(process.versions.node)</script>,
-    Chromium <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
+        <title>rpterm</title>
+        <link rel="stylesheet" href="node_modules/xterm/src/xterm.css" />
+        <link rel="stylesheet" href="style.css" />
+        <script src="node_modules/xterm/src/xterm.js" ></script>
+        <script src="node_modules/xterm/addons/fit/fit.js" ></script>
+        <script src="xterm.js" defer ></script>
+    </head>
+    <body>
+        <div id="terminal-container"></div>
   </body>
 </html>
