@@ -10,3 +10,6 @@ run:
 
 debug:
 	DEBUG=yesplease npm start
+
+lint:
+	./node_modules/.bin/eslint ./ || ./node_modules/.bin/eslint --fix ./
