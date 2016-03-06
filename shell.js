@@ -3,7 +3,7 @@ var shellp
 
 exports.start = function start (cb_out, cb_err) {
   shellp = pty.spawn('/bin/bash', ['-i'], {
-    name: 'rpterm-unicode-256color',
+    name: 'xterm-256color',
     cwd: process.cwd(),
     env: process.env
   })
@@ -20,4 +20,8 @@ exports.start = function start (cb_out, cb_err) {
 
 exports.feed = function feed (key) {
   shellp.write(key + '')
+}
+
+exports.resize = function resize (cols, rows) {
+  shellp.resize(cols, rows);
 }

@@ -14,7 +14,11 @@ shell.start(
     function stderr (s) { term.write(s.split('\n').join('\r\n')) }
 )
 
-term.on('key', function (key, ev) {
+term.on('key', function key (key, ev) {
   shell.feed(key)
   return
+})
+
+term.on('resize', function resize (data) {
+  shell.resize(data.cols, data.rows)
 })
