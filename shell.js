@@ -3,7 +3,7 @@ var shellp
 
 exports.start = function start (cb_out, cb_err) {
   shellp = pty.spawn('/bin/bash', ['-i'], {
-    name: 'xterm-color',
+    name: 'rpterm-unicode-256color',
     cwd: process.cwd(),
     env: process.env
   })

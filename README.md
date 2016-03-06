@@ -7,11 +7,24 @@ A graphical typewriter.
 * `make`
 * `make run` (or `make debug`)
 
-## Problems
+## Documentation
 
-* the layout engine can't be used seperately, and can't be switched out
+* TODO
+
+## Bugs
+
+* no xterm compatible mouse support (yet (maybe))
+* the shell to execute is hard-coded to `/bin/bash -i`
+* using a web browser to display a shell is ridiculous
+
+## Known Design Problems
+
+* the layout engine can't be used separately, and can't be switched out
 * this only runs wherever chromium runs, porting it means porting chromium
   (instead of just a small IO part)
+* the untyped nature of byte streams in unix makes interpreting them a fiddly,
+  and ultimately buggy, balancing act
+* it's unclear weather inline UI code (via escape codes) is a good idea at all
 
 ## Author and License
 
@@ -31,3 +44,13 @@ Parts of this based on https://github.com/atom/electron-quick-start,
 and the xterm.js demo at https://github.com/sourcelair/xterm.js/tree/master/demo,
 Copyright (c) 2014-2016, SourceLair, Private Company (www.sourcelair.com) (MIT License)
 Copyright (c) 2012-2013, Christopher Jeffrey (MIT License)
+
+## Credits
+
+Thanks to iterm2 (http://iterm2.com/) for inspiration and for ESC [ 1337.
+
+This program has pretty much nothing in common with it, but if you're
+interested in how one would do similar things properly, have a look at Plan 9's
+draw device (http://plan9.bell-labs.com/magic/man2html/3/draw) and rio
+(http://plan9.bell-labs.com/magic/man2html/1/rio9) and drawterm
+(http://plan9.bell-labs.com/magic/man2html/8/drawterm).
