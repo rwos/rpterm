@@ -4,7 +4,6 @@ var term = new Terminal()
 term.open(terminalContainer)
 term.fit()
 window.onresize = function () {
-  console.log('RESIZE')
   term.fit()
 }
 
