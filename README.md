@@ -13,7 +13,9 @@ A graphical typewriter.
 
 ## Bugs
 
-* no xterm compatible mouse support (yet (maybe))
+* xterm compatible mouse support is implemented (by xterm.js) but doesn't work
+  here for some weird reason
+  (see also https://github.com/f/atom-term2/issues/195)
 * the shell to execute is hard-coded to `/bin/bash -i`
 * using a web browser to display a shell is ridiculous
 
