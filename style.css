@@ -1,4 +1,4 @@
-html, body, #terminal-container {
+html, body, .terminal-container {
     min-height: 100%;
     margin: 0;
     padding: 0;
@@ -8,18 +8,18 @@ body {
     background-color: #000;
 }
 
-#terminal-container {
+.terminal-container {
     font-size: 12px;
     font-family: monospace;
 }
 
-#terminal-container .terminal {
+.terminal-container .terminal {
     padding: 10px 5px;
     background-color: #000;
     color: #fafafa;
 }
 
-#terminal-container .terminal .terminal-cursor {
+.terminal-container .terminal .terminal-cursor {
     background-color: #fafafa;
 }
 

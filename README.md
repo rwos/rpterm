@@ -13,20 +13,22 @@ A graphical typewriter.
 
 ## Bugs
 
-* xterm compatible mouse support is implemented (by xterm.js) but doesn't work
-  here for some weird reason
-  (see also https://github.com/f/atom-term2/issues/195)
-* the shell to execute is hard-coded to `/bin/bash -i`
-* using a web browser to display a shell is ridiculous
+* Xterm compatible mouse support is implemented (by xterm.js) but doesn't work
+  here for some weird reason (see also https://github.com/f/atom-term2/issues/195).
+* The shell to execute is hard-coded to `/bin/bash -i`.
+* Using a web browser to display a shell is ridiculous.
+* Because of how HTML output is hacked into this, it's impossible to combine
+  rpterm's escape codes with older ones, especially cursor-addressing codes.
 
 ## Known Design Problems
 
-* the layout engine can't be used separately, and can't be switched out
-* this only runs wherever chromium runs, porting it means porting chromium
-  (instead of just a small IO part)
-* the untyped nature of byte streams in unix makes interpreting them a fiddly,
-  and ultimately buggy, balancing act
-* it's unclear whether inline UI code (via escape codes) is a good idea at all
+* The layout engine can't be used separately, and can't be switched out.
+* The untyped nature of byte streams in unix makes interpreting them a fiddly,
+  and ultimately buggy, balancing act.
+* It's unclear whether inline UI code (via escape codes) is a good idea at all.
+* It's unclear how pictures and other graphical elements and row/column based
+  cursor addressing are supposed to mix. They don't at all, in this program,
+  but that doesn't really solve anything.
 
 ## Author and License
 
