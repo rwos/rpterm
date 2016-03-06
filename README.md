@@ -24,7 +24,7 @@ A graphical typewriter.
   (instead of just a small IO part)
 * the untyped nature of byte streams in unix makes interpreting them a fiddly,
   and ultimately buggy, balancing act
-* it's unclear weather inline UI code (via escape codes) is a good idea at all
+* it's unclear whether inline UI code (via escape codes) is a good idea at all
 
 ## Author and License
 
