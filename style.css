@@ -1,12 +1,11 @@
 html, body, #terminal-container {
-    height: 100%;
+    min-height: 100%;
     margin: 0;
     padding: 0;
 }
 
 body {
     background-color: #000;
-    overflow: hidden;
 }
 
 #terminal-container {
@@ -22,4 +21,13 @@ body {
 
 #terminal-container .terminal .terminal-cursor {
     background-color: #fafafa;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(200, 200, 200, 0.3);
+    border-radius: 2.5px;
 }
