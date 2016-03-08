@@ -11,6 +11,11 @@ function createWindow () {
   mainWindow = new BrowserWindow({width: 800, height: 600, title: 'rpterm'})
   mainWindow.setMenu(null)
   mainWindow.loadURL(path.join('file://', __dirname, '/index.html'))
+
+  if (process.argv.length === 3) {
+    process.chdir(process.argv[2])
+  }
+
   if (process.env.DEBUG) {
     mainWindow.webContents.openDevTools()
   }

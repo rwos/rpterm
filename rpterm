@@ -2,4 +2,4 @@
 
 OLDPWD="$(pwd)"
 cd "$(dirname $0)"
-exec node_modules/.bin/electron main.js
+exec node_modules/.bin/electron main.js "$OLDPWD"

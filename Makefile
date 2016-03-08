@@ -17,7 +17,7 @@ lint:
 install:
 	mkdir -p /opt/rpterm
 	cp -R ./ /opt/rpterm
-	echo you may want to add /opt/rpterm to your PATH
-	echo
-	echo "echo 'export PATH=\"/opt/rpterm:\$$PATH\"' >> ~/.bashrc"
-	echo "source ~/.bashrc"
+	@echo you may want to add /opt/rpterm to your PATH
+	@echo
+	@echo "echo 'export PATH=\"/opt/rpterm:\$$PATH\"' >> ~/.bashrc"
+	@echo "source ~/.bashrc"
