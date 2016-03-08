@@ -38,11 +38,10 @@ identifies as a TERM=xterm-256color so that termcap programs don't freak out).
 
 ## Examples
 
-TODO
+* `printf '\033]1338;image;'; curl -s https://http.cat/200 | base64; printf '\033\\'`
 
 ## Bugs
 
-* "Examples" section is empty
 * Xterm compatible mouse support is implemented (by xterm.js) but doesn't work
   here for some weird reason (see also https://github.com/f/atom-term2/issues/195).
 * The shell to execute is hard-coded to `/bin/bash -i`.
