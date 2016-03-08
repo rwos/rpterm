@@ -6,18 +6,48 @@ A graphical typewriter.
 
 * `make`
 * `make run` (or `make debug`)
+* `make install` installs it in `/opt/rpterm`
+  (weird location because there's no packaging yet)
 
-## Documentation
+## Escape Codes
 
-* TODO
+rpterm understands most escape codes that xterm understands (and in fact,
+identifies as a TERM=xterm-256color so that termcap programs don't freak out).
+
+#### iterm2 embed OSC 1337
+
+`OSC 1337 ; FILESPEC BEL` (OSC is `ESC ]`)
+
+* iterm2's embedding code, for an explanation of what to put in for
+  `FILESPEC`, see https://iterm2.com/images.html
+* rpterm only supports embedding images with this escape code (but see OSC 1338
+  below) - on iterm2 you can also embed PDFs with OSC 1337.
+* rpterm does not support downloading files via this escape code
+* rpterm also understands the somewhat more usual terminating
+  `ST` (`ESC 0x5c`) instead of the `BEL` - not sure if iterm2 does, too
+
+#### rpterm embed OSC 1338
+
+`OSC 1338 ; MIMETYPE ; DATA BEL` (and `OSC 1338 ; MIMETYPE ; DATA ST`)
+
+* `MIMETYPE` can be the specific mime type (`image/gif`) or you can leave out
+  the second part (just `image`). No wildcards are supported.
+* `DATA` is the base64 encoded data that you want to display
+* Not all mime types will be supported, and there's currently no real list
+  about what is supported (the goal is certainly to support as many as possible)
+
+## Examples
+
+TODO
 
 ## Bugs
 
+* "Examples" section is empty
 * Xterm compatible mouse support is implemented (by xterm.js) but doesn't work
   here for some weird reason (see also https://github.com/f/atom-term2/issues/195).
 * The shell to execute is hard-coded to `/bin/bash -i`.
 * Using a web browser to display a shell is ridiculous.
-* I can't figure out how to make this abdomination display use a misc-fixed font.
+* I can't figure out how to make this abdomination display a misc-fixed font.
 * Because of how HTML output is hacked into this, it's impossible to combine
   rpterm's escape codes with older ones, especially cursor-addressing codes.
 
