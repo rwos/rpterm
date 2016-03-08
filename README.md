@@ -14,7 +14,17 @@ A graphical typewriter.
 rpterm understands most escape codes that xterm understands (and in fact,
 identifies as a TERM=xterm-256color so that termcap programs don't freak out).
 
-#### iterm2 embed OSC 1337
+#### rpterm embed OSC 1338
+
+`OSC 1338 ; MIMETYPE ; DATA BEL` (and `OSC 1338 ; MIMETYPE ; DATA ST`)
+
+* `MIMETYPE` can be the specific mime type (`image/gif`) or you can leave out
+  the second part (just `image`). No wildcards are supported.
+* `DATA` is the base64 encoded data that you want to display
+* Not all mime types will be supported, and there's currently no real list
+  about what is supported (the goal is certainly to support as many as possible)
+
+#### NOT IMPLEMENTED YET: iterm2 embed OSC 1337
 
 `OSC 1337 ; FILESPEC BEL` (OSC is `ESC ]`)
 
@@ -25,16 +35,6 @@ identifies as a TERM=xterm-256color so that termcap programs don't freak out).
 * rpterm does not support downloading files via this escape code
 * rpterm also understands the somewhat more usual terminating
   `ST` (`ESC 0x5c`) instead of the `BEL` - not sure if iterm2 does, too
-
-#### rpterm embed OSC 1338
-
-`OSC 1338 ; MIMETYPE ; DATA BEL` (and `OSC 1338 ; MIMETYPE ; DATA ST`)
-
-* `MIMETYPE` can be the specific mime type (`image/gif`) or you can leave out
-  the second part (just `image`). No wildcards are supported.
-* `DATA` is the base64 encoded data that you want to display
-* Not all mime types will be supported, and there's currently no real list
-  about what is supported (the goal is certainly to support as many as possible)
 
 ## Examples
 
