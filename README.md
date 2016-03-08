@@ -17,6 +17,7 @@ A graphical typewriter.
   here for some weird reason (see also https://github.com/f/atom-term2/issues/195).
 * The shell to execute is hard-coded to `/bin/bash -i`.
 * Using a web browser to display a shell is ridiculous.
+* I can't figure out how to make this abdomination display use a misc-fixed font.
 * Because of how HTML output is hacked into this, it's impossible to combine
   rpterm's escape codes with older ones, especially cursor-addressing codes.
 
