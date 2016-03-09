@@ -23,5 +23,5 @@ exports.feed = function feed (key) {
 }
 
 exports.resize = function resize (cols, rows) {
-  shellp.resize(cols, rows);
+  shellp.resize(cols, rows)
 }
