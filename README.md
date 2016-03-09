@@ -90,7 +90,7 @@ Copyright (c) 2012-2013, Christopher Jeffrey (MIT License)
 
 ## Credits
 
-Thanks to iterm2 (http://iterm2.com/) for inspiration and for ESC [ 1337.
+Thanks to iterm2 (http://iterm2.com/) for inspiration and for ESC ] 1337.
 
 This program has pretty much nothing in common with it, but if you're
 interested in how one would do similar things properly, have a look at Plan 9's
