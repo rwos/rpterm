@@ -14,27 +14,29 @@ A graphical typewriter.
 rpterm understands most escape codes that xterm understands (and in fact,
 identifies as a TERM=xterm-256color so that termcap programs don't freak out).
 
+Additionally supported are:
+
+#### [NOT IMPLEMENTED YET] iterm2 embed OSC 1337
+
+`OSC 1337 ; FILESPEC BEL` (OSC is `ESC ]`)
+
+* iterm2's embedding code - for an explanation of what to put in for
+  `FILESPEC`, see https://iterm2.com/images.html
+* rpterm *only supports embedding images* with this escape code (but see OSC 1338
+  below) - on iterm2 you can also embed PDFs with OSC 1337.
+* rpterm does not support downloading files via this escape code.
+* rpterm also understands the somewhat more usual terminating
+  `ST` (`ESC 0x5c`) instead of the `BEL` - it's unclear if iterm2 does, too.
+
 #### rpterm embed OSC 1338
 
 `OSC 1338 ; MIMETYPE ; DATA BEL` (and `OSC 1338 ; MIMETYPE ; DATA ST`)
 
 * `MIMETYPE` can be the specific mime type (`image/gif`) or you can leave out
   the second part (just `image`). No wildcards are supported.
-* `DATA` is the base64 encoded data that you want to display
-* Not all mime types will be supported, and there's currently no real list
-  about what is supported (the goal is certainly to support as many as possible)
-
-#### NOT IMPLEMENTED YET: iterm2 embed OSC 1337
-
-`OSC 1337 ; FILESPEC BEL` (OSC is `ESC ]`)
-
-* iterm2's embedding code, for an explanation of what to put in for
-  `FILESPEC`, see https://iterm2.com/images.html
-* rpterm only supports embedding images with this escape code (but see OSC 1338
-  below) - on iterm2 you can also embed PDFs with OSC 1337.
-* rpterm does not support downloading files via this escape code
-* rpterm also understands the somewhat more usual terminating
-  `ST` (`ESC 0x5c`) instead of the `BEL` - not sure if iterm2 does, too
+* `DATA` is the base64 encoded data that you want to display.
+* Not all mime types are supported but there's currently no list about what
+  is supported (the goal is certainly to support as many as possible).
 
 ## Examples
 
@@ -47,18 +49,25 @@ identifies as a TERM=xterm-256color so that termcap programs don't freak out).
 * The shell to execute is hard-coded to `/bin/bash -i`.
 * Using a web browser to display a shell is ridiculous.
 * I can't figure out how to make this abdomination display a misc-fixed font.
-* Because of how HTML output is hacked into this, it's impossible to combine
-  rpterm's escape codes with older ones, especially cursor-addressing codes.
+
+## Not Bugs
+
+* There is no direct way for programs to write HTML for the terminal to
+  display because the author hopes to get rid of the HTML/browser
+  implementation eventually.
 
 ## Known Design Problems
 
-* The layout engine can't be used separately, and can't be switched out.
 * The untyped nature of byte streams in unix makes interpreting them a fiddly,
   and ultimately buggy, balancing act.
 * It's unclear whether inline UI code (via escape codes) is a good idea at all.
-* It's unclear how pictures and other graphical elements and row/column based
-  cursor addressing are supposed to mix. They don't at all, in this program,
-  but that doesn't really solve anything.
+* The graphical escape codes always use, in cursor-addressing terms,
+  a full row (with "one character" in it). Because of that, it is tricky to
+  combine them with cursor-addressing escape codes (though one could call that
+  a feature). These "graphical" rows also don't interact with other escape
+  codes (bold, colors, etc.), though that could be fixed where it makes sense.
+* While this can be made to be just as powerful as "real" GUIs output-wise,
+  the input side of things is pretty much missing here.
 
 ## Author and License
 
