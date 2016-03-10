@@ -38,13 +38,26 @@ Additionally supported are:
 * Not all mime types are supported but there's currently no list about what
   is supported (the goal is certainly to support as many as possible).
 
+## Wrappers
+
+rpterm ships with wrappers for some common unix programs that automatically
+insert embedding escape codes.
+
 ## Examples
 
-* `printf '\033]1338;image;'; curl -s https://http.cat/200 | base64; printf '\033\\'`
+* directly in rpterm: `curl -s https://http.cat/200` (this uses a curl wrapper)
+* in your own scripts you can do something like
+  `printf '\033]1338;image;'; curl -s https://http.cat/200 | base64; printf '\033\\'`
+
+## Not Bugs
+
+* There is no direct way for programs to write HTML for the terminal to
+  display because the author hopes to get rid of the HTML/browser
+  implementation eventually.
 
 ## Bugs
 
-* Xterm compatible mouse support is implemented (by xterm.js) but doesn't work
+* xterm compatible mouse support is implemented (by xterm.js) but doesn't work
   here for some weird reason (see also https://github.com/f/atom-term2/issues/195).
 * The shell to execute is hard-coded to `/bin/bash -i`.
 * Using a web browser to display a shell is ridiculous.
@@ -60,12 +73,6 @@ $ printf '\033]1338;image/jpeg;'; \
     cat /tmp/cat.jpg | base64 | tail -c +101; \
     printf '\033\\'`
 ```
-
-## Not Bugs
-
-* There is no direct way for programs to write HTML for the terminal to
-  display because the author hopes to get rid of the HTML/browser
-  implementation eventually.
 
 ## Known Design Problems
 
