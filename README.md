@@ -49,6 +49,17 @@ Additionally supported are:
 * The shell to execute is hard-coded to `/bin/bash -i`.
 * Using a web browser to display a shell is ridiculous.
 * I can't figure out how to make this abdomination display a misc-fixed font.
+* It should be possible to stream OSC 1337/1338 data, but it isn't:
+
+```
+# doesn't work, but should
+$ curl -s https://http.cat/303 > /tmp/cat.jpg
+$ printf '\033]1338;image/jpeg;'; \
+    cat /tmp/cat.jpg | base64 | head -c 100; \
+    sleep 3; \
+    cat /tmp/cat.jpg | base64 | tail -c +101; \
+    printf '\033\\'`
+```
 
 ## Not Bugs
 
