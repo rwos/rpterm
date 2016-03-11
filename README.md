@@ -62,6 +62,7 @@ insert above embedding escape codes.
 ## Bugs
 
 * scrolling with embedded HTML is almost completely broken
+* pasting into the terminal doesn't seem to work at all
 * xterm compatible mouse support is implemented (by xterm.js) but doesn't work
   here for some weird reason (see also https://github.com/f/atom-term2/issues/195).
 * The shell to execute is hard-coded to `/bin/bash -i`.
