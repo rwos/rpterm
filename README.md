@@ -2,6 +2,10 @@
 
 A graphical typewriter.
 
+Very much in pre-alpha state, currently.
+
+![](screengif.gif)
+
 ## Setup
 
 * `make`
@@ -41,7 +45,7 @@ Additionally supported are:
 ## Wrappers
 
 rpterm ships with wrappers for some common unix programs that automatically
-insert embedding escape codes.
+insert above embedding escape codes.
 
 ## Examples
 
