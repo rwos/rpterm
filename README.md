@@ -67,7 +67,7 @@ insert above embedding escape codes.
   here for some weird reason (see also https://github.com/f/atom-term2/issues/195).
 * The shell to execute is hard-coded to `/bin/bash -i`.
 * Using a web browser to display a shell is ridiculous.
-* I can't figure out how to make this abdomination display a misc-fixed font.
+* I can't figure out how to make this abomination display a misc-fixed font.
 * It should be possible to stream OSC 1337/1338 data, but it isn't:
 
 ```
