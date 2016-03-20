@@ -47,6 +47,11 @@ function init_wrappers () { return heredoc(function() {/*
   }
 
   function rpterm_wrap_files() {
+    if ! [ -t 1 ]
+    then
+      command cat "$@"
+      return
+    fi
     for f in "$@"
     do
       mime="$(command cat "$f" 2>/dev/null | command file -i -b - | command cut -d ';' -f 1)"
@@ -62,10 +67,10 @@ function init_wrappers () { return heredoc(function() {/*
 
   function rpterm_wrap_inline() {
     cmd="$1"; shift
-    if [ -t 1 ]
+    if ! [ -t 1 ]
     then
       command "$cmd" "$@"
-      exit $?
+      return
     fi
     tmp="$(mktemp)"
     mime="$(command "$cmd" "$@" | command tee "$tmp" | command file -i -b - | command cut -d ';' -f 1)"
