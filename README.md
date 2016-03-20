@@ -34,11 +34,19 @@ Additionally supported are:
 
 #### rpterm embed OSC 1338
 
-`OSC 1338 ; MIMETYPE ; DATA BEL` (and `OSC 1338 ; MIMETYPE ; DATA ST`)
+`OSC 1338 ; MIMETYPE ; URL BEL` (and `OSC 1338 ; MIMETYPE ; URL ST`)
 
 * `MIMETYPE` can be the specific mime type (`image/gif`) or you can leave out
   the second part (just `image`). No wildcards are supported.
-* `DATA` is the base64 encoded data that you want to display.
+* `URL` is the URL of the thing you want to embed. Explicitly supported are:
+  * `data:$MIMETYPE;$ENCODING,$DATA` where `$MIMETYPE` is the mime type (again),
+    `$ENCODING` is something like `base64` and `$DATA` is the encoded data.
+  * `file://$ABSOLUTE_PATH` where `$ABSOLUTE_PATH` this is (local) path to the
+    file to embed
+  * `http://` and `https://` URLs
+  * Other schemas (`ftp://` and so on) will probably work, too. But sticking to
+    the above leaves at least a glimmer of hope that this escape code can be
+    implemented by something smaller than a full web browser engine.
 * Not all mime types are supported but there's currently no list about what
   is supported (the goal is certainly to support as many as possible).
 
@@ -51,7 +59,7 @@ insert above embedding escape codes.
 
 * directly in rpterm: `curl -s https://http.cat/200` (this uses a curl wrapper)
 * in your own scripts you can do something like
-  `printf '\033]1338;image;'; curl -s https://http.cat/200 | base64; printf '\033\\'`
+  `printf '\033]1338;image;data:image;base64,'; curl -s https://http.cat/200 | base64; printf '\033\\'`
 
 ## Not Bugs
 
@@ -73,7 +81,7 @@ insert above embedding escape codes.
 ```
 # doesn't work, but should
 $ curl -s https://http.cat/303 > /tmp/cat.jpg
-$ printf '\033]1338;image/jpeg;'; \
+$ printf '\033]1338;image/jpeg;data:image/jpeg;base64,'; \
     cat /tmp/cat.jpg | base64 | head -c 100; \
     sleep 3; \
     cat /tmp/cat.jpg | base64 | tail -c +101; \

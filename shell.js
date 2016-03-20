@@ -37,15 +37,42 @@ exports.resize = function resize (cols, rows) {
 }
 
 function init_wrappers () { return heredoc(function() {/*
-  function rpterm_wrap() {
-    ### TODO: check if stdout is tty
+
+  function rpterm_abs_path() {
+    realpath "$1" 2>/dev/null || \
+      readlink -f "$1" 2>/dev/null || \
+      greadlink -f "$1" 2>/dev/null || \
+      printf "%s" "$1" | grep "^/" || \
+      echo "$PWD/$1"
+  }
+
+  function rpterm_wrap_files() {
+    for f in "$@"
+    do
+      mime="$(command cat "$f" 2>/dev/null | command file -i -b - | command cut -d ';' -f 1)"
+      ### XXX only image here
+      command printf "%s" "$mime" | if command grep -q 'image'
+      then
+        command printf '\033]1338;%s;file://%s\033\\' "$mime" $(rpterm_abs_path "$f")
+      else
+        command cat "$f"
+      fi
+    done
+  }
+
+  function rpterm_wrap_inline() {
     cmd="$1"; shift
+    if [ -t 1 ]
+    then
+      command "$cmd" "$@"
+      exit $?
+    fi
     tmp="$(mktemp)"
     mime="$(command "$cmd" "$@" | command tee "$tmp" | command file -i -b - | command cut -d ';' -f 1)"
     ### XXX only image here
     command printf "%s" "$mime" | if command grep -q 'image'
     then
-      command printf '\033]1338;%s;' "$mime"
+      command printf '\033]1338;%s;data:%s;base64,' "$mime" "$mime"
       command cat "$tmp" | base64
       command printf '\033\\'
     else
@@ -55,10 +82,15 @@ function init_wrappers () { return heredoc(function() {/*
   }
 
   function curl() {
-    rpterm_wrap curl -s "$@"
+    rpterm_wrap_inline curl -s "$@"
   }
 
   function cat() {
-    rpterm_wrap cat "$@"
+    if [ $# -eq 0 ]
+    then
+      rpterm_wrap_inline cat
+    else
+      rpterm_wrap_files "$@"
+    fi
   }
 */})}
