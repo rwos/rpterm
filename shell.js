@@ -46,6 +46,16 @@ function init_wrappers () { return heredoc(function() {/*
       echo "$PWD/$1"
   }
 
+  function rpterm_hash() {
+    printf "%s" "$1" | sha1sum | command cut -d ' ' -f 1
+  }
+
+  function rpterm_genthumbnail() {
+    mkdir -p "$HOME/.cache/rpterm/thumbnail/"
+    namehash="$(rpterm_hash "$1")"
+    convert "$1" -resize 64x64 "$HOME/.cache/rpterm/thumbnail/$namehash" 2>/dev/null
+  }
+
   function rpterm_wrap_files() {
     if ! [ -t 1 ]
     then
@@ -86,6 +96,8 @@ function init_wrappers () { return heredoc(function() {/*
     rm -f "$tmp"
   }
 
+  #### wrappers
+
   function curl() {
     rpterm_wrap_inline curl -s "$@"
   }
@@ -96,6 +108,28 @@ function init_wrappers () { return heredoc(function() {/*
       rpterm_wrap_inline cat
     else
       rpterm_wrap_files "$@"
+    fi
+  }
+
+  ### XXX this is too buggy to replace ls currently
+  #alias ls=ls # has color=auto by default on debian
+  function imgls() {
+    if [ $# -eq 0 ]
+    then
+      for f in *
+      do
+        abs="$(rpterm_abs_path "$f")"
+        echo "$f"
+        if [ -f "$HOME/.cache/rpterm/thumbnail/$(rpterm_hash "$abs")" ]
+        then
+          rpterm_wrap_inline cat "$HOME/.cache/rpterm/thumbnail/$(rpterm_hash "$abs")"
+        else
+          rpterm_genthumbnail "$abs"
+          rpterm_wrap_inline cat "$HOME/.cache/rpterm/thumbnail/$(rpterm_hash "$abs")" 2>/dev/null
+        fi
+      done
+    else
+      command ls "$@"
     fi
   }
 */})}
